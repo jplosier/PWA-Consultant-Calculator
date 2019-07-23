@@ -25,38 +25,37 @@ function makeReloadButton(){
   oReload.className = "material-icons";
   oReload.text = 'refresh';
   oReload.href = location.href + '?' + Math.random();
-
   document.body.appendChild(oReload);
   d(1, 'makeReloadButton();  // end');
 };   //  makeReloadButton();
 
 
-function loadItem(key) {
-  d(1, 'loadItem();  // start');
+function restoreInputValue(key) {
+  d(1, 'restoreInputValue();  // start');
   localforage.getItem(key).then(function(result){
     document.getElementById(key).value = result;
   }, function(err){
-    console.log('ERROR ' + err + ' in loadItem("' + key + '")');
+    console.log('ERROR ' + err + ' in restoreInputValue("' + key + '")');
   });
 
-  d(1, 'loadItem();  // end');
-};  // loadItem();
+  d(1, 'restoreInputValue();  // end');
+};  // restoreInputValue();
 
 
 function loadData() {
   d(1, 'loadData();  // start');
   // ship_rate, hand_fee, tax_rate, comm_rate
-  loadItem('ship_rate');
-  loadItem('hand_fee');
-  loadItem('tax_rate');
-  loadItem('comm_rate');
+  restoreInputValue('ship_rate');
+  restoreInputValue('hand_fee');
+  restoreInputValue('tax_rate');
+  restoreInputValue('comm_rate');
   
   d(1, 'loadData();  // end');
 };  // loadData()
 
 
-function saveItem(key) {
-  d(1, 'saveItem("' + key + '");  // start');
+function saveInputValue(key) {
+  d(1, 'saveInputValue("' + key + '");  // start');
   
   localforage.setItem(key, get_value(key)).then(function () {
     return localforage.getItem(key);
@@ -64,20 +63,20 @@ function saveItem(key) {
     // we got our value
   }).catch(function (err) {
     // we got an error
-    d(1, 'ERROR: "' + err + '" in saveData();');
+    d(1, 'ERROR: "' + err + '" in saveInputValue();');
   });
 
-  d(1, 'saveItem();  // end');
-};  // saveItem()
+  d(1, 'saveInputValue();  // end');
+};  // saveInputValue()
 
 
 function saveData() {
   d(1, 'saveData();  // start');
   // ship_rate, hand_fee, tax_rate, comm_rate
-  saveItem('ship_rate');
-  saveItem('hand_fee');
-  saveItem('tax_rate');
-  saveItem('comm_rate');
+  saveInputValue('ship_rate');
+  saveInputValue('hand_fee');
+  saveInputValue('tax_rate');
+  saveInputValue('comm_rate');
   d(1, 'saveData();  // end');
 };  // saveData()
 
@@ -118,6 +117,7 @@ function set(id, text) {
 
 function money(number) {
   d(1, 'money();  // start');
+  if (!number) number = 0;
   return '$' + number.toFixed(2);
   d(1, 'money();  // end');
 };  // money();

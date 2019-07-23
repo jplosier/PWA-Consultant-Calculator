@@ -1,12 +1,13 @@
 self.addEventListener('install', function(e) {
   e.waitUntil(
-    caches.open('PWA').then(function(cache) {
+    caches.open('PWAConsultantCalculator').then(function(cache) {
       return cache.addAll([
 				'index.html',
 				'favicon.ico',
 				'styles/main.css', 
 				'scripts/main.js',
-				'scripts/localforage.min.js'
+				'scripts/localforage.min.js',
+				'scripts/install.js'
 			]);
 		})
 	);
